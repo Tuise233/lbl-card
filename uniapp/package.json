@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@dcloudio/uni-ui": "^1.4.28",
+    "@vue/cli": "^5.0.8",
+    "sass-loader": "^10.1.1"
+  },
+  "devDependencies": {
+    "sass": "^1.66.1"
+  }
+}

@@ -1,0 +1,14 @@
+<view class="app-md">
+  <text class="app-md-header">拉布拉卡</text>
+  <view class="app-md-back" bindtap="handleBack">
+    <text class="far fa-arrow-alt-circle-left"></text>
+    <text>返回</text>
+  </view>
+  <image class="app-md-img" src="{{ item.img }}"></image>
+  <view class="app-md-button" bindtap="finishMission">
+    <text class="far fa-flag"></text>
+    <text>点击打卡</text>
+  </view>
+  <text class="app-md-title">{{ item.name }}</text>
+  <text class="app-md-desc">{{ item.description }}</text>
+</view>

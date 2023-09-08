@@ -1,0 +1,52 @@
+<!-- Missions List -->
+<view class="app-ml">
+  <view class="app-ml-header">
+    <text class="app-ml-title">拉布拉卡</text>
+    <view class="app-ml-tabbar">
+      <text class="app-ml-tabbar-item {{currentItem == 'mine' ? 'app-ml-tabbar-item-active' : ''}}" bindtap="toggleItem" data-item="mine">我的</text>
+      <text class="app-ml-tabbar-item {{currentItem == 'other' ? 'app-ml-tabbar-item-active' : ''}}" bindtap="toggleItem" data-item="other">TA的</text>
+      <view class="app-ml-toggle">
+        <text style="margin-left: 7.69rpx;" bindtap="toggleShowType">{{ showTypes[showIndex] }}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="app-ml-content" wx:if="{{ currentItem == 'mine' }}">
+    <text class="app-ml-content-empty" wx:if="{{ missionData.length === 0 }}">没有任何东西~</text>
+    <view class="app-ml-content-item" wx:for="{{ missionData }}" wx:key="id" bindtap="openDetail" data-item="{{ item }}">
+      <image class="app-ml-content-item-img" src="{{ item.img }}"/>
+      <view class="app-ml-content-item-right">
+        <view class="app-ml-row">
+          <text class="app-ml-item-title">{{ item.name }}</text>
+          <view class="app-ml-item-type">
+            <text class="app-ml-item-type-text">{{ item.type == 0 ? "每日" : "长期" }}</text>
+          </view>
+        </view>
+        
+        <view class="app-ml-row">
+          <text class="app-ml-item-score" wx:if="{{ item.type == 0 }}">{{ item.score }} 积分</text>
+          <text class="app-ml-item-combo" wx:else>已累计 {{ item.combo }} 天</text>
+          <!-- <text class="app-ml-item-state">{{ item.state == 0 ? "未完成" : "已完成" }}</text> -->
+          <text class="app-ml-item-state">{{ item.finishState }}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="app-ml-content" wx:if="{{ currentItem == 'other' }}">
+    <text>123</text>
+    <text class="fa-brands fa-algolia "></text>
+    <text>456</text>
+    <!-- <view class="app-ml-content-options">
+      <view class="app-ml-content-options-item">
+        <text class="far fa-bookmark"></text>
+        <text>每日打卡情况</text>
+      </view>
+      <view class="app-ml-content-options-item">
+        <text class="far fa-user"></text>
+        <text>每月打卡情况</text>
+      </view>
+    </view> -->
+    
+  </view>
+</view>

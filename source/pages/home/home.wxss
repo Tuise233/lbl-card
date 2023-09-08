@@ -1,0 +1,45 @@
+.app-home{
+  width: 100vw;
+  height: 100vh;
+}
+
+.app-navbar{
+  width: 100vw;
+  height: 192.31rpx;
+  background-color: white;
+  box-shadow: 0rpx -4rpx 10rpx -8rpx rgba(0,0,0,0.25);
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.app-navbar-item{
+  width: 96.15rpx;
+  height: 96.15rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 26.92rpx;
+}
+
+.app-navbar-item-active{
+  width: 96.15rpx;
+  height: 96.15rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 26.92rpx;
+  color: #3EAFC8;
+  font-weight: bold;
+}
+
+.navicon{
+  margin-top: 9.62rpx;
+  font-size: 46rpx;
+}
+
+.navtext{
+  margin-top: 11.54rpx;
+  font-size: 23.08rpx;
+}

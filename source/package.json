@@ -1,0 +1,14 @@
+{
+  "name": "lbl-card",
+  "version": "1.0.0",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tuise233",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    
+  }
+}

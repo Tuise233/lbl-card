@@ -1,0 +1,21 @@
+<view class="app-home">
+  <mission-list wx:if="{{ currentNavbar == 'home' }}"></mission-list>
+  
+  
+
+  <!-- navbar -->
+  <view class="app-navbar">
+  <view class="app-navbar-item{{ currentNavbar == 'home' ? '-active' : '' }}" bindtap="toggleNavItem" data-item="home">
+    <text class="navicon far fa-calendar-check"></text>
+    <text class="navtext">打卡任务</text>
+  </view>
+  <view class="app-navbar-item{{ currentNavbar == 'store' ? '-active' : '' }}" bindtap="toggleNavItem" data-item="store">
+    <text class="navicon far fa-hdd"></text>
+    <text class="navtext">积分商城</text>
+  </view>
+  <view class="app-navbar-item{{ currentNavbar == 'profile' ? '-active' : '' }}" bindtap="toggleNavItem" data-item="profile">
+    <text class="navicon far fa-user"></text>
+    <text class="navtext">我的</text>
+  </view>
+</view>
+</view>
