@@ -101,7 +101,6 @@ export default {
         },
 
         loadMissionCheck(item){
-            console.log(item.type, item.checkType, item.checkState, item.state)
             if(item.type == 1 || item.checkType == 0 || (item.checkType == 1 && item.state == 1)) return;
             let missionId = item.id;
             uni.navigateTo({

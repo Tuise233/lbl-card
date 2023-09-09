@@ -78,7 +78,7 @@ const app = getApp();
 export default {
     data() {
         return {
-            currentPage: "other", //mine other
+            currentPage: "mine", //mine other
             typeIndex: 0,
             types: ["全部", "每日", "长期"],
 
@@ -212,7 +212,10 @@ export default {
         },
         
         openCreateMission(){
-            
+            this.isBack = true;
+            uni.navigateTo({
+                url: "/pages/create_mission/create_mission"
+            });
         }
     }
 }
