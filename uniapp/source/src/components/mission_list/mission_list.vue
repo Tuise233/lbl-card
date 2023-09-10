@@ -47,7 +47,7 @@
             </view>
 
             <view>
-                <view class="com-ml-content-item com-ml-content-item-other" v-for="item in missionData">
+                <view class="com-ml-content-item com-ml-content-item-other" v-for="item in missionData" @click="editMission(item.id)">
                     <img :src="item.img" />
                     <view>
                         <view>
@@ -164,7 +164,12 @@ export default {
                 },
                 success: (res) => {
                     if (res.data.code !== 200) {
-                        console.log(res.data.msg);
+                        uni.showToast({
+                            title: res.data.msg,
+                            icon: "fail",
+                            mask: true,
+                            position: "top"
+                        });
                         return;
                     }
                     this.originData = res.data.data;
@@ -182,7 +187,12 @@ export default {
                 },
                 success: (res) => {
                     if (res.data.code !== 200) {
-                        console.log(res.data.msg);
+                        uni.showToast({
+                            title: res.data.msg,
+                            icon: "fail",
+                            mask: true,
+                            position: "top"
+                        });
                         return;
                     }
                     this.originData = res.data.data;
@@ -204,10 +214,27 @@ export default {
             });
         },
 
+        editMission(missionId){
+            this.isBack = true;
+            uni.navigateTo({
+                url: `/pages/create_mission/create_mission?missionId=${missionId}`
+            });
+        },
+
         onNavigateBack() {
             if (this.isBack == true) {
                 this.isBack = false;
-                this.loadMissions(app.globalData.userInfo.userId);
+                switch(this.currentPage){
+                    case "mine": {
+                        this.loadMissions(app.globalData.userInfo.userId);
+                        break;
+                    }
+
+                    case "other": {
+                        this.loadTargetMissions(app.globalData.userInfo.userId, this.queryType.ONLY_UNFINISH);
+                        break;
+                    }
+                }
             }
         },
         

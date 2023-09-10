@@ -42,9 +42,9 @@ Component({
   },
 
   ready() {
-    if(this.data.checkInterval === null){
+    if (this.data.checkInterval === null) {
       let interval = setInterval(() => {
-        if(app.globalData.userInfo != null){
+        if (app.globalData.userInfo != null) {
           clearInterval(this.data.checkInterval);
           this.loadMissionData();
         }
@@ -66,7 +66,7 @@ Component({
         showIndex: 0
       });
 
-      if(item == "mine"){
+      if (item == "mine") {
         this.loadMissionData();
       } else {
         this.loadTargetMissionData();
@@ -85,22 +85,22 @@ Component({
       }
 
       //切换展示方式
-      switch(this.data.showIndex){
-        case 0:{
+      switch (this.data.showIndex) {
+        case 0: {
           this.setData({
             missionData: this.data.originData
           });
           break;
         }
 
-        case 1:{
+        case 1: {
           this.setData({
             missionData: this.data.originData.filter(item => item.type == 0)
           });
           break;
         }
 
-        case 2:{
+        case 2: {
           this.setData({
             missionData: this.data.originData.filter(item => item.type == 1)
           });
@@ -118,17 +118,22 @@ Component({
         },
         success: (res) => {
           if (res.data.code !== 200) {
-            console.log(res.data.msg);
+            uni.showToast({
+              title: res.data.msg,
+              icon: "fail",
+              mask: true,
+              position: "top"
+            });
             return;
           }
-          for(let i = 0; i < res.data.data.length; i++){
+          for (let i = 0; i < res.data.data.length; i++) {
             let finishState = "未完成";
-            if(res.data.data[i].type == 0 && res.data.data[i].state == 1){
+            if (res.data.data[i].type == 0 && res.data.data[i].state == 1) {
               finishState = "已完成";
-            } else if(res.data.data[i].type == 1) {
+            } else if (res.data.data[i].type == 1) {
               let finishTime = new Date(res.data.data[i].finishTime);
               let currentTime = new Date();
-              if(currentTime.getFullYear() === finishTime.getFullYear() && currentTime.getMonth() == finishTime.getMonth() && currentTime.getDate() == finishTime.getDate()){
+              if (currentTime.getFullYear() === finishTime.getFullYear() && currentTime.getMonth() == finishTime.getMonth() && currentTime.getDate() == finishTime.getDate()) {
                 finishState = "已完成";
               }
             }
@@ -144,8 +149,8 @@ Component({
       })
     },
 
-    loadTargetMissionData(){
-      if(app.globalData.userInfo.targetId === "" || app.globalData.userInfo.targetId === undefined) {
+    loadTargetMissionData() {
+      if (app.globalData.userInfo.targetId === "" || app.globalData.userInfo.targetId === undefined) {
         this.setData({
           missionData: [],
           originData: []
@@ -160,8 +165,13 @@ Component({
           targetId: app.globalData.userInfo.targetId
         },
         success: (res) => {
-          if(res.data.code !== 200){
-            console.log(res.data.msg);
+          if (res.data.code !== 200) {
+            uni.showToast({
+              title: res.data.msg,
+              icon: "fail",
+              mask: true,
+              position: "top"
+            });
             return;
           }
           this.setData({
@@ -172,7 +182,7 @@ Component({
       })
     },
 
-    openDetail(e){
+    openDetail(e) {
       let item = e.currentTarget.dataset.item;
       wx.redirectTo({
         url: `/pages/mission_detail/mission_detail?id=${item.id}`,

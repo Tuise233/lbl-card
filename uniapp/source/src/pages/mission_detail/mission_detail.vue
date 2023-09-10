@@ -42,7 +42,12 @@ export default{
                 },
                 success: (res) => {
                     if(res.data.code !== 200){
-                        console.log(res.data.msg);
+                        uni.showToast({
+                            title: res.data.msg,
+                            icon: "fail",
+                            mask: true,
+                            position: "top"
+                        });
                         return;
                     }
                     this.mission = res.data.data;
@@ -64,7 +69,12 @@ export default{
                 },
                 success: (res) => {
                     if(res.data.code !== 200){
-                        console.log(res.data.msg);
+                        uni.showToast({
+                            title: res.data.msg,
+                            icon: "fail",
+                            mask: true,
+                            position: "top"
+                        });
                         return;
                     }
                     uni.navigateBack();

@@ -22,7 +22,7 @@ Page({
         missionId: missionId
       },
       success: (res) => {
-        if(res.data.code !== 200){
+        if (res.data.code !== 200) {
           return;
         }
         this.setData({
@@ -32,13 +32,13 @@ Page({
     })
   },
 
-  handleBack(){
+  handleBack() {
     wx.redirectTo({
       url: '/pages/home/home',
     });
   },
 
-  finishMission(){
+  finishMission() {
     wx.request({
       url: `${config.apiUrl}/mission/finishMission`,
       method: "GET",
@@ -47,8 +47,13 @@ Page({
         missionId: this.data.item.id
       },
       success: (res) => {
-        if(res.data.code !== 200){
-          console.log(res.data.msg);
+        if (res.data.code !== 200) {
+          uni.showToast({
+            title: res.data.msg,
+            icon: "fail",
+            mask: true,
+            position: "top"
+          });
           return;
         }
         wx.redirectTo({

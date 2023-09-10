@@ -22,25 +22,25 @@
         </view>
         <text class="app-md-title">{{ mission.name }}</text>
         <text class="app-md-desc">{{ mission.description }}</text>
-    </view>    
+    </view>
 </template>
 
 <script>
 const app = getApp();
-export default{
+export default {
 
-    onLoad(options){
+    onLoad(options) {
         this.loadMissionDetail(options.missionId);
     },
 
-    data(){
+    data() {
         return {
             mission: null
         }
     },
 
     methods: {
-        loadMissionDetail(missionId){
+        loadMissionDetail(missionId) {
             uni.request({
                 url: `${app.globalData.apiUrl}/mission/getMissionById`,
                 method: "GET",
@@ -48,8 +48,13 @@ export default{
                     missionId: missionId
                 },
                 success: (res) => {
-                    if(res.data.code !== 200){
-                        console.log(res.data.msg);
+                    if (res.data.code !== 200) {
+                        uni.showToast({
+                            title: res.data.msg,
+                            icon: "fail",
+                            mask: true,
+                            position: "top"
+                        });
                         return;
                     }
                     this.mission = res.data.data;
@@ -57,17 +62,17 @@ export default{
             })
         },
 
-        back(){
+        back() {
             uni.navigateBack();
         },
 
-        updateMissionCheck(passed){
-            if(passed){
+        updateMissionCheck(passed) {
+            if (passed) {
                 uni.showModal({
                     title: "通过打卡",
                     content: "你确定要通过打卡?",
                     success: (res) => {
-                        if(res.confirm){
+                        if (res.confirm) {
                             uni.request({
                                 url: `${app.globalData.apiUrl}/mission/updateMissionCheck`,
                                 method: "GET",
@@ -77,8 +82,13 @@ export default{
                                     isPass: true
                                 },
                                 success: (res) => {
-                                    if(res.data.code !== 200){
-                                        console.log(res.data.msg);
+                                    if (res.data.code !== 200) {
+                                        uni.showToast({
+                                            title: res.data.msg,
+                                            icon: "fail",
+                                            mask: true,
+                                            position: "top"
+                                        });
                                         return;
                                     }
                                     uni.navigateBack();
@@ -92,7 +102,7 @@ export default{
                     title: "驳回打卡",
                     content: "你确定要驳回打卡?",
                     success: (res) => {
-                        if(res.confirm){
+                        if (res.confirm) {
                             uni.request({
                                 url: `${app.globalData.apiUrl}/mission/updateMissionCheck`,
                                 method: "GET",
@@ -102,8 +112,13 @@ export default{
                                     isPass: false
                                 },
                                 success: (res) => {
-                                    if(res.data.code !== 200){
-                                        console.log(res.data.msg);
+                                    if (res.data.code !== 200) {
+                                        uni.showToast({
+                                            title: res.data.msg,
+                                            icon: "fail",
+                                            mask: true,
+                                            position: "top"
+                                        });
                                         return;
                                     }
                                     uni.navigateBack();
@@ -115,7 +130,7 @@ export default{
             }
         },
 
-        finishMission(){
+        finishMission() {
             uni.request({
                 url: `${app.globalData.apiUrl}/mission/finishMission`,
                 method: "GET",
@@ -124,8 +139,13 @@ export default{
                     missionId: this.mission.id
                 },
                 success: (res) => {
-                    if(res.data.code !== 200){
-                        console.log(res.data.msg);
+                    if (res.data.code !== 200) {
+                        uni.showToast({
+                            title: res.data.msg,
+                            icon: "fail",
+                            mask: true,
+                            position: "top"
+                        });
                         return;
                     }
                     uni.navigateBack();
@@ -137,7 +157,7 @@ export default{
 </script>
 
 <style>
-.app-md{
+.app-md {
     width: 100vw;
     height: 100vh;
     background-color: #FBFDFF;
@@ -145,16 +165,16 @@ export default{
     flex-direction: column;
 }
 
-.app-md-header{
+.app-md-header {
     width: 100vw;
     height: 346.15rpx;
     display: flex;
     flex-direction: column;
     background-color: white;
-    box-shadow: 0rpx 8rpx 10rpx -12rpx rgba(0,0,0,0.25);
+    box-shadow: 0rpx 8rpx 10rpx -12rpx rgba(0, 0, 0, 0.25);
 }
 
-.app-md-header > text{
+.app-md-header>text {
     font-size: 50rpx;
     height: 50rpx;
     line-height: 50rpx;
@@ -163,7 +183,7 @@ export default{
     margin-left: 38.46rpx;
 }
 
-.app-md-header > view {
+.app-md-header>view {
     width: 107.69rpx;
     display: flex;
     align-items: center;
@@ -171,13 +191,13 @@ export default{
     margin-top: 76.92rpx;
 }
 
-.app-md-button-split{
+.app-md-button-split {
     width: 3.85rpx;
     height: 67.31rpx;
     background-color: white;
 }
 
-.app-md-header > view > text {
+.app-md-header>view>text {
     font-size: 26.92rpx;
     height: 26.92rpx;
     line-height: 26.92rpx;
@@ -185,7 +205,7 @@ export default{
     margin-left: 9.62rpx;
 }
 
-.app-md-header > view > uni-icons{
+.app-md-header>view>uni-icons {
     font-weight: bold;
 }
 
@@ -194,7 +214,7 @@ export default{
     height: 384.62rpx;
 }
 
-.app-md-button{
+.app-md-button {
     width: 384.62rpx;
     height: 153.85rpx;
     display: flex;
@@ -206,13 +226,13 @@ export default{
     border-radius: 96rpx;
 }
 
-.app-md-button > view {
+.app-md-button>view {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.app-md-button > view > text{
+.app-md-button>view>text {
     font-size: 26.92rpx;
     height: 26.92rpx;
     line-height: 26.92rpx;

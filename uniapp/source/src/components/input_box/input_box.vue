@@ -5,7 +5,7 @@
 
         <view class="com-inputbox-default com-inputbox-number" v-else-if="type == 'number'">
             <uni-icons type="left" color="#8E8E8E" size="35rpx" @click="toggleNumber('decrease')"></uni-icons>
-            <input :type="inputType" :value="localValue" @input="$emit('input', $event.target.value)" />
+            <input type="number" :value="localValue" @input="$emit('input', $event.target.value)" />
             <uni-icons type="right" color="#8E8E8E" size="35rpx" @click="toggleNumber('increase')"></uni-icons>
         </view>
         

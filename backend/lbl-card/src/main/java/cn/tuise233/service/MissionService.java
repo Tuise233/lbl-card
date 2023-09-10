@@ -15,4 +15,12 @@ public interface MissionService extends IService<Missions>  {
     ResponseResult finishMission(String userId, String missionId);
 
     ResponseResult updateMissionCheck(String userId, String missionId, boolean isPass);
+
+    ResponseResult createMission(Missions mission);
+
+    ResponseResult saveMission(Missions mission);
+
+    ResponseResult deleteMission(String userId, Integer missionId);
+
+
 }

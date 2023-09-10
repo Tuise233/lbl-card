@@ -20,6 +20,7 @@ public enum AppHttpCodeEnum {
     IS_NOT_MISSION_CREATOR(605, "不是打卡的创建者"),
     IS_NOT_CHECK_MISSION(606, "不是可审核的打卡"),
     IS_CHECKED(607, "这个打卡已经审核过了"),
+    IS_NOT_CORRECT_MISSION(608, "打卡任务数据校验错误")
 
 
 

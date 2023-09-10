@@ -37,7 +37,7 @@
 const app = getApp();
 
 export default {
-    data(){
+    data() {
         return {
             originData: [],
             queryType: {
@@ -53,7 +53,7 @@ export default {
     },
 
     computed: {
-        missionData: function(){
+        missionData: function () {
             let data = this.originData.filter(item => item.type == this.listType);
             data.forEach(item => {
                 let date = new Date(item.finishTime);
@@ -70,19 +70,19 @@ export default {
             return data;
         }
     },
-    
-    onLoad(options){
+
+    onLoad(options) {
         this.listType = options.type;
         this.listText = this.listType == 0 ? "每日打卡情况" : "每月打卡情况";
         this.loadMissionData();
     },
 
     methods: {
-        back(){
+        back() {
             uni.navigateBack();
         },
 
-        loadMissionData(){
+        loadMissionData() {
             uni.request({
                 url: `${app.globalData.apiUrl}/mission/getListByCreatorId`,
                 method: "GET",
@@ -91,8 +91,13 @@ export default {
                     type: this.queryType.ONLY_FINISHED
                 },
                 success: (res) => {
-                    if(res.data.code !== 200){
-                        console.log(res.data.msg);
+                    if (res.data.code !== 200) {
+                        uni.showToast({
+                            title: res.data.msg,
+                            icon: "fail",
+                            mask: true,
+                            position: "top"
+                        });
                         return;
                     }
                     this.originData = res.data.data;
@@ -100,16 +105,16 @@ export default {
             })
         },
 
-        loadMissionCheck(item){
-            if(item.type == 1 || item.checkType == 0 || (item.checkType == 1 && item.state == 1)) return;
+        loadMissionCheck(item) {
+            if (item.type == 1 || item.checkType == 0 || (item.checkType == 1 && item.state == 1)) return;
             let missionId = item.id;
             uni.navigateTo({
                 url: `/pages/mission_check/mission_check?missionId=${missionId}`
             });
         },
 
-        getMissionText(item){
-            if(item.checkType == 0) return "已完成";
+        getMissionText(item) {
+            if (item.checkType == 0) return "已完成";
             return item.checkState == 0 ? "待审核" : "已审核";
         }
     }
@@ -123,16 +128,16 @@ export default {
     background-color: #FBFDFF;
 }
 
-.app-mtl-header{
+.app-mtl-header {
     width: 100vw;
     height: 346.15rpx;
     display: flex;
     flex-direction: column;
     background-color: white;
-    box-shadow: 0rpx 8rpx 10rpx -12rpx rgba(0,0,0,0.25);
+    box-shadow: 0rpx 8rpx 10rpx -12rpx rgba(0, 0, 0, 0.25);
 }
 
-.app-mtl-header > text{
+.app-mtl-header>text {
     font-size: 50rpx;
     height: 50rpx;
     line-height: 50rpx;
@@ -141,7 +146,7 @@ export default {
     margin-left: 38.46rpx;
 }
 
-.app-mtl-header > view {
+.app-mtl-header>view {
     width: 100%;
     display: flex;
     align-items: center;
@@ -151,7 +156,7 @@ export default {
     padding: 0 38.46rpx;
 }
 
-.app-mtl-header > view > text {
+.app-mtl-header>view>text {
     font-size: 26.92rpx;
     height: 26.92rpx;
     line-height: 26.92rpx;
@@ -159,12 +164,12 @@ export default {
     margin-left: auto;
 }
 
-.app-mtl-header > view > view {
+.app-mtl-header>view>view {
     display: flex;
     align-items: center;
 }
 
-.app-mtl-header > view > view > text {
+.app-mtl-header>view>view>text {
     font-size: 26.92rpx;
     height: 26.92rpx;
     line-height: 26.92rpx;
@@ -172,11 +177,11 @@ export default {
     margin-left: 9.62rpx;
 }
 
-.app-mtl-header > view > view > uni-icons{
+.app-mtl-header>view>view>uni-icons {
     font-weight: bold;
 }
 
-.app-mtl > view:last-child{
+.app-mtl>view:last-child {
     width: 100vw;
     height: calc(100vh - 346.15rpx);
     display: flex;
@@ -187,24 +192,24 @@ export default {
     overflow: scroll;
 }
 
-.app-mtl-item{
+.app-mtl-item {
     width: 100%;
     height: 115.38rpx;
     display: flex;
     background-color: white;
     border-radius: 10rpx;
-    box-shadow: 0rpx 0rpx 19rpx -8rpx rgba(0,0,0,0.25);
+    box-shadow: 0rpx 0rpx 19rpx -8rpx rgba(0, 0, 0, 0.25);
     margin-top: 38.46rpx;
 }
 
-.app-mtl-item > img{
+.app-mtl-item>img {
     width: 115.38rpx;
     height: 115.38rpx;
     border-top-left-radius: 10rpx;
     border-bottom-left-radius: 10rpx;
 }
 
-.app-mtl-item > view {
+.app-mtl-item>view {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -212,21 +217,21 @@ export default {
     padding: 19.23rpx;
 }
 
-.app-mtl-item > view > view{
+.app-mtl-item>view>view {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.app-mtl-item > view > view:first-child > text{
+.app-mtl-item>view>view:first-child>text {
     font-size: 26.92rpx;
     height: 26.92rpx;
     line-height: 26.92rpx;
     font-weight: bold;
 }
 
-.app-mtl-item > view > view:first-child > view {
+.app-mtl-item>view>view:first-child>view {
     width: 76.92rpx;
     height: 28.85rpx;
     display: flex;
@@ -236,30 +241,30 @@ export default {
     background-color: #3EAFC8;
 }
 
-.app-mtl-item > view > view:first-child > view > text{
+.app-mtl-item>view>view:first-child>view>text {
     font-size: 19.23rpx;
     height: 19.23rpx;
     line-height: 19.23rpx;
     color: white;
 }
 
-.app-mtl-item > view > view:last-child{
+.app-mtl-item>view>view:last-child {
     margin-top: auto;
     margin-bottom: 0;
 }
 
-.app-mtl-item > view > view:last-child > text{
+.app-mtl-item>view>view:last-child>text {
     font-size: 19.23rpx;
     height: 19.23rpx;
     line-height: 19.23rpx;
     color: #8E8E8E;
 }
 
-.app-mtl-item > view > view:last-child > text:first-child{
+.app-mtl-item>view>view:last-child>text:first-child {
     color: #FC8800;
 }
 
-.app-mtl-item:last-child{
+.app-mtl-item:last-child {
     margin-bottom: 38.46rpx;
 }
 </style>

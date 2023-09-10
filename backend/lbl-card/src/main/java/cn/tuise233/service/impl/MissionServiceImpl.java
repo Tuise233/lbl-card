@@ -13,6 +13,7 @@ import cn.tuise233.util.DateCompare;
 import cn.tuise233.vo.MissionListVo;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import io.swagger.models.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,7 @@ public class MissionServiceImpl extends ServiceImpl<MissionMapper, Missions> imp
         missionQuery.eq(Missions::getState, 0);
         List<Missions> missionList = list(missionQuery);
         List<MissionListVo> missionVos = BeanCopy.copyBeanList(missionList, MissionListVo.class);
+        Collections.reverse(missionVos);
         return ResponseResult.okResult(missionVos);
     }
 
@@ -72,6 +74,7 @@ public class MissionServiceImpl extends ServiceImpl<MissionMapper, Missions> imp
         }
         List<Missions> missionList = list(queryWrapper);
         List<MissionListVo> missionVos = BeanCopy.copyBeanList(missionList, MissionListVo.class);
+        Collections.reverse(missionVos);
         return ResponseResult.okResult(missionVos);
     }
 
@@ -138,4 +141,49 @@ public class MissionServiceImpl extends ServiceImpl<MissionMapper, Missions> imp
         saveOrUpdate(mission);
         return ResponseResult.okResult();
     }
+
+    @Override
+    public ResponseResult createMission(Missions mission){
+        LambdaQueryWrapper<Users> userQuery = new LambdaQueryWrapper<>();
+        userQuery.eq(Users::getUserId, mission.getCreatorId());
+        Users user = userService.getOne(userQuery);
+        if(Objects.isNull(user)) return ResponseResult.errorResult(AppHttpCodeEnum.USER_NOT_EXIST);
+        mission.setOwnerId(user.getTargetId());
+        mission.setCreateTime(new Date());
+        saveOrUpdate(mission);
+        return ResponseResult.okResult();
+    }
+
+    @Override
+    public ResponseResult saveMission(Missions mission) {
+        LambdaQueryWrapper<Missions> missionQuery = new LambdaQueryWrapper<>();
+        missionQuery.eq(Missions::getId, mission.getId());
+        Missions curMission = getOne(missionQuery);
+        if(!curMission.getCreatorId().equals(mission.getCreatorId())) return ResponseResult.errorResult(AppHttpCodeEnum.IS_NOT_CORRECT_MISSION);
+        curMission.setName(mission.getName());
+        curMission.setDescription(mission.getDescription());
+        curMission.setType(mission.getType());
+        curMission.setCheckType(mission.getCheckType());
+        curMission.setScore(mission.getScore());
+        curMission.setImg(mission.getImg());
+        saveOrUpdate(curMission);
+        return ResponseResult.okResult(curMission.getId());
+    }
+
+    @Override
+    public ResponseResult deleteMission(String userId, Integer missionId) {
+        LambdaQueryWrapper<Users> userQuery = new LambdaQueryWrapper<>();
+        Users user = userService.getOne(userQuery);
+        if(Objects.isNull(user)) return ResponseResult.errorResult(AppHttpCodeEnum.USER_NOT_EXIST);
+        LambdaQueryWrapper<Missions> missionQuery = new LambdaQueryWrapper<>();
+        missionQuery.eq(Missions::getId, missionId);
+        Missions mission = getOne(missionQuery);
+        if(Objects.isNull(mission)) return ResponseResult.errorResult(AppHttpCodeEnum.MISSION_NOT_EXIST);
+        if(!mission.getCreatorId().equals(userId)) return ResponseResult.errorResult(AppHttpCodeEnum.IS_NOT_MISSION_CREATOR);
+        remove(missionQuery);
+        return ResponseResult.okResult();
+    }
+
+
+
 }
