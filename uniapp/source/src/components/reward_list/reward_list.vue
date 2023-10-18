@@ -22,7 +22,7 @@
                     </view>
                 </view>
 
-                <view>
+                <view @click="loadRewardRecord">
                     <uni-icons type="calendar-filled" size="40" color="#575757"></uni-icons>
                     <text>兑换记录</text>
                 </view>
@@ -220,6 +220,12 @@ export default {
                         });
                     }
                 }
+            });
+        },
+
+        loadRewardRecord() {
+            uni.navigateTo({
+                url: `/pages/reward_record/reward_record?userId=${app.globalData.userInfo.userId}`
             });
         }
     }

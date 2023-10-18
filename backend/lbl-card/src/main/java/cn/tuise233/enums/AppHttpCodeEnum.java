@@ -26,7 +26,8 @@ public enum AppHttpCodeEnum {
     REWARD_NOT_ENOUGH(611, "打卡奖励没有足够的库存了"),
     REWARD_CAN_NOT_AFFORD(612, "没有足够的积分可以兑换奖励"),
     IS_NOT_REWARD_OWNER(613, "不是该奖励的所有者"),
-
+    ITEM_NOT_EXIST(614, "奖励不存在"),
+    ITEM_ALREADY_USED(615, "奖励已使用"),
     ;
 
 

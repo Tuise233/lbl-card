@@ -40,6 +40,13 @@
 				"navigationStyle": "custom",
 				"disableScroll": true
 			}
+		},
+		{
+			"path": "pages/reward_record/reward_record",
+			"style": {
+				"navigationStyle": "custom",
+				"disableScroll": true
+			}
 		}
 	],
 	"globalStyle": {
