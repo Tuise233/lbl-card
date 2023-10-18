@@ -3,6 +3,7 @@
         <view class="app-home-content">
             <!-- 页面容器 -->
             <MissionList v-if="currentTab == 'mission'" ref="missionList"/>
+            <RewardList v-if="currentTab == 'reward'" ref="rewardList"/>
         </view>
 
         <!-- 底部导航栏 -->
@@ -27,17 +28,19 @@
 
 <script>
 import MissionList from "@/components/mission_list/mission_list.vue";
+import RewardList from "@/components/reward_list/reward_list.vue";
 
 const app = getApp();
 
 export default{
     components: {
-        MissionList
+        MissionList,
+        RewardList
     },
 
     data(){
         return {
-            currentTab: "mission", //mission reward profile
+            currentTab: "reward", //mission reward profile
             checkInterval: null,
         }
     },

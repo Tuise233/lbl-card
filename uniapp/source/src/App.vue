@@ -20,6 +20,7 @@ export default {
 							return;
 						}
 						const openId = res.data.data;
+						this.globalData.openId = openId;
 						uni.request({
 							url: `${this.globalData.apiUrl}/user/checkExist`,
 							method: "GET",
@@ -94,7 +95,8 @@ export default {
 
 	globalData: {
 		apiUrl: "http://localhost:8085",
-		userInfo: null
+		userInfo: null,
+		openId: null
 	}
 }
 </script>

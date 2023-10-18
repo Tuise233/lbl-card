@@ -32,6 +32,8 @@ public class Users {
     private String name;
     //绑定对方用户id
     private String targetId;
+    //所获得积分
+    private Integer score;
     //注册时间
     private Date registerTime;
 }

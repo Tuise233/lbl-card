@@ -14,5 +14,6 @@ public class UserVo {
     private String userId;
     private String name;
     private String targetId;
+    private Integer score;
     private Date registerTime;
 }

@@ -20,9 +20,12 @@ public enum AppHttpCodeEnum {
     IS_NOT_MISSION_CREATOR(605, "不是打卡的创建者"),
     IS_NOT_CHECK_MISSION(606, "不是可审核的打卡"),
     IS_CHECKED(607, "这个打卡已经审核过了"),
-    IS_NOT_CORRECT_MISSION(608, "打卡任务数据校验错误")
-
-
+    IS_NOT_CORRECT_MISSION(608, "打卡任务数据校验错误"),
+    MISSION_OWNER_NOT_EXIST(609, "打卡任务的所有人不存在"),
+    REWARD_NOT_EXIST(610, "打卡奖励不存在"),
+    REWARD_NOT_ENOUGH(611, "打卡奖励没有足够的库存了"),
+    REWARD_CAN_NOT_AFFORD(612, "没有足够的积分可以兑换奖励"),
+    IS_NOT_REWARD_OWNER(613, "不是该奖励的所有者"),
 
     ;
 

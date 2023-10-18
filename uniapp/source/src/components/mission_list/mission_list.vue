@@ -119,7 +119,7 @@ export default {
     created() {
         uni.showLoading({
             title: "加载中..."
-        })
+        });
         const that = this;
         if (this.checkInterval === null) {
             this.checkInterval = setInterval(() => {

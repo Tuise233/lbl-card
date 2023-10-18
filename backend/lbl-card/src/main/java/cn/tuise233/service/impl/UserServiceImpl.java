@@ -20,9 +20,6 @@ import java.util.Map;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, Users> implements UserService {
 
-    @Autowired
-    private UserMapper userMapper;
-
     @Override
     public ResponseResult checkExist(String open_id) {
         try{
@@ -56,7 +53,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, Users> implements U
         user.setOpenId(open_id);
         user.setName(name);
         user.setRegisterTime(new Date());
-        userMapper.insert(user);
+        save(user);
         UserVo userVo = BeanCopy.copyBean(user, UserVo.class);
         return ResponseResult.okResult(userVo);
     }
