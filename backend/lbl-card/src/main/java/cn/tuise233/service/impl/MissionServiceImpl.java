@@ -182,6 +182,7 @@ public class MissionServiceImpl extends ServiceImpl<MissionMapper, Missions> imp
     @Override
     public ResponseResult deleteMission(String userId, Integer missionId) {
         LambdaQueryWrapper<Users> userQuery = new LambdaQueryWrapper<>();
+        userQuery.eq(Users::getUserId, userId);
         Users user = userService.getOne(userQuery);
         if(Objects.isNull(user)) return ResponseResult.errorResult(AppHttpCodeEnum.USER_NOT_EXIST);
         LambdaQueryWrapper<Missions> missionQuery = new LambdaQueryWrapper<>();

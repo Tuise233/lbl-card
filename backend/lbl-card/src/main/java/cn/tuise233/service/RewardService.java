@@ -8,4 +8,12 @@ public interface RewardService extends IService<Rewards> {
     ResponseResult getRewardByOwnerId(String ownerId);
 
     ResponseResult buyReward(String userId, Integer rewardId);
+
+    ResponseResult createReward(Rewards reward);
+
+    ResponseResult saveReward(Rewards reward);
+
+    ResponseResult deleteReward(String creatorId, Integer rewardId);
+
+    ResponseResult getRewardById(Integer rewardId);
 }

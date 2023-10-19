@@ -28,7 +28,7 @@
                 </view>
             </view>
             <view class="com-rl-content-list">
-                <view v-for="item in datas" @click="buyReward(item)">
+                <view v-for="item in datas" @click="buyOrEdit(item)">
                     <img :src="item.img"/>
                     <text class="com-rl-content-list-item-title">{{ item.name }}</text>
                     <view>
@@ -38,7 +38,7 @@
                 </view>
             </view>
         </view>
-        <view class="com-ml-content-create-button" v-if="typeIndex == 1">
+        <view class="com-ml-content-create-button" v-if="typeIndex == 1" @click="createReward">
             <uni-icons type="plusempty" size="25" color="white"></uni-icons>
         </view>
     </view>    
@@ -227,6 +227,22 @@ export default {
             uni.navigateTo({
                 url: `/pages/reward_record/reward_record?userId=${app.globalData.userInfo.userId}`
             });
+        },
+
+        createReward() {
+            uni.navigateTo({
+                url: "/pages/create_reward/create_reward"
+            });
+        },
+
+        buyOrEdit(item) {
+            if(item.creatorId == app.globalData.userInfo.userId) {
+                uni.navigateTo({
+                    url: `/pages/create_reward/create_reward?rewardId=${item.id}`
+                });
+            } else {
+                this.buyReward(item);
+            }
         }
     }
 }

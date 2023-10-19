@@ -47,6 +47,13 @@
 				"navigationStyle": "custom",
 				"disableScroll": true
 			}
+		}, 
+		{
+			"path": "pages/create_reward/create_reward",
+			"style": {
+				"navigationStyle": "custom",
+				"disableScroll": true
+			}
 		}
 	],
 	"globalStyle": {
