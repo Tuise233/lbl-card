@@ -27,7 +27,11 @@ public class UserController {
 
     @GetMapping("/createUser")
     public ResponseResult createUser(@RequestParam String open_id, @RequestParam String name){
-        System.out.println("open_id: " + open_id + "  username: " + name);
         return userService.createUser(open_id, name);
+    }
+
+    @GetMapping("/getUserInfoById")
+    public ResponseResult getUserInfoById(@RequestParam String userId) {
+        return userService.getuserInfoById(userId);
     }
 }

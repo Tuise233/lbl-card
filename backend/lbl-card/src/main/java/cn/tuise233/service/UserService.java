@@ -10,4 +10,6 @@ public interface UserService extends IService<Users> {
     ResponseResult getUserInfo(String open_id);
 
     ResponseResult createUser(String open_id, String name);
+
+    ResponseResult getuserInfoById(String userId);
 }

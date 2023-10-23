@@ -1,6 +1,7 @@
 package cn.tuise233.service.impl;
 
 import cn.tuise233.entity.Users;
+import cn.tuise233.enums.AppHttpCodeEnum;
 import cn.tuise233.enums.ResponseResult;
 import cn.tuise233.mapper.UserMapper;
 import cn.tuise233.service.UserService;
@@ -9,13 +10,11 @@ import cn.tuise233.util.Randoms;
 import cn.tuise233.vo.UserVo;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import kotlin.jvm.internal.Lambda;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, Users> implements UserService {
@@ -54,6 +53,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, Users> implements U
         user.setName(name);
         user.setRegisterTime(new Date());
         save(user);
+        UserVo userVo = BeanCopy.copyBean(user, UserVo.class);
+        return ResponseResult.okResult(userVo);
+    }
+
+    @Override
+    public ResponseResult getuserInfoById(String userId) {
+        LambdaQueryWrapper<Users> userQuery = new LambdaQueryWrapper<>();
+        userQuery.eq(Users::getUserId, userId);
+        Users user = getOne(userQuery);
+        if(Objects.isNull(user)) {
+            return ResponseResult.errorResult(AppHttpCodeEnum.USER_NOT_EXIST);
+        }
         UserVo userVo = BeanCopy.copyBean(user, UserVo.class);
         return ResponseResult.okResult(userVo);
     }
